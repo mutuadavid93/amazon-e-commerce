@@ -1,6 +1,5 @@
 # Amazon E-commerce Application
 
-
 #### Built with Laravel, Vue, TailwindCSS and Vite
 
 <p align="center">
@@ -12,4 +11,10 @@
 
 <hr />
 
+#### Create a Model, Migration and Controller
 
+-   `$ php artisan make:model Category -mc --resource`
+
+#### Now seed the database
+
+-   `$ php artisan migrate:fresh --seed`
