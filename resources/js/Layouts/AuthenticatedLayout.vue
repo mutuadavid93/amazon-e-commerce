@@ -6,8 +6,11 @@ import MenuDownIcon from "vue-material-design-icons/MenuDown.vue";
 import MagnifyIcon from "vue-material-design-icons/Magnify.vue";
 import CartMinusIcon from "vue-material-design-icons/CartMinus.vue";
 import MenuIcon from "vue-material-design-icons/Menu.vue";
+import AccountCircleIcon from "vue-material-design-icons/AccountCircle.vue";
+import CloseIcon from "vue-material-design-icons/Close.vue";
+import ChevronRightIcon from "vue-material-design-icons/ChevronRight.vue";
 
-const showingNavigationDropdown = ref(false);
+let showMenu = ref(false);
 </script>
 
 <template>
@@ -138,6 +141,7 @@ flex container after all other flex items have taken up their specified widths -
     >
       <div class="flex">
         <div
+          @click="showMenu = true"
           class="flex h-[30px] border-[1px] border-[#232F3E] rounded-sm hover:border-[1px] hover:border-gray-100 cursor-pointer"
         >
           <div class="flex items-center justify-between px-2">
@@ -181,7 +185,7 @@ flex container after all other flex items have taken up their specified widths -
           </div>
         </div>
       </div>
-      
+
       <div class="flex">
         <div
           class="flex h-[30px] border-[1px] border-[#232F3E] rounded-sm hover:border-[1px] hover:border-gray-100 cursor-pointer"
@@ -285,5 +289,44 @@ i.e.  ensuring all child elements have equal height
       </div>
       <div class="mb-10"></div>
     </footer>
+  </div>
+
+  <!-- Side Menu -->
+  <div
+    v-if="showMenu"
+    class="top-0 z-50 fixed w-full h-full bg-black bg-opacity-70"
+    :class="[showMenu ? 'animate__animated animate__fadeIn animate__faster' : '']"
+  >
+    <CloseIcon
+      @click="showMenu = false"
+      :size="30"
+      fillColor="#DCDCDC"
+      class="ml-2.5 mt-3.5 left-80 cursor-pointer fixed z-50"
+      :class="[showMenu ? 'animate__animated animate__fadeIn animate__faster' : '']"
+    />
+
+    <div
+      :class="[showMenu ? 'animate__animated animate__slideInLeft animate__faster' : '']"
+      class="w-80 h-full bg-white"
+    >
+      <div
+        class="bg-[#232F3E] font-extrabold tex-[18px] flex items-center p-2 text-white pl-7"
+      >
+        <span>Hello, Sign in</span>
+      </div>
+
+      <div class="font-extrabold text-[16px] pt-3 pb-1 pl-6 pr-3 text-black">
+        Shop By Department
+      </div>
+
+      <div class="hover:bg-gray-200 pl-6 pr-3">
+        <div
+          class="py-2.5 text-[13px] text-black flex justify-between items-center hover:bg-gray-200 cursor-pointer"
+        >
+          Computers
+          <ChevronRightIcon :size="20" fillColor="#808080" />
+        </div>
+      </div>
+    </div>
   </div>
 </template>
