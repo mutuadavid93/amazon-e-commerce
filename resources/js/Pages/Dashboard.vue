@@ -1,10 +1,97 @@
-<script setup>
-import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
-import { Head } from "@inertiajs/vue3";
-</script>
-
 <template>
   <Head title="Dashboard" />
 
-  <AuthenticatedLayout> Page content here... </AuthenticatedLayout>
+  <!-- Layout is our masterpage  -->
+  <AuthenticatedLayout>
+    <!-- Slider section -->
+    <Carousel :items-to-show="1" :wrap-around="true">
+      <Slide v-for="slide in 10" :key="slide">
+        <div class="carousel__item">
+          <img
+            src="https://via.placeholder.com/3000x1200.png/004466?text=Testing"
+            alt=""
+          />
+        </div>
+      </Slide>
+
+      <template #addons>
+        <Navigation />
+      </template>
+    </Carousel>
+
+    <!-- Categories section 
+    -mt-[300px]: move the section upword into the slider
+    -->
+    <div class="relative -mt-[300px]">
+      <div class="flex m-4 z-10 relative">
+        <div class="bg-white mx-2 p-2 text-md w-full text-center">
+          You are on amazon.com You can also shop on Amazon UK for millions of products
+          with fast local delivery.
+          <span class="underline text-teal-600 cursor-pointer"
+            >Click here to go to amazon.co.uk</span
+          >
+        </div>
+      </div>
+
+      <!-- TIP: tailwindcss also has grid layout classes too -->
+      <div class="grid grid-cols-3 m-4 z-10 relative">
+        <!-- HINT: grid items can as well be flexed -->
+        <div class="p-1.5 flex">
+          <div class="bg-white p-5">
+            <div class="text-2xl font-extrabold flex">Computers</div>
+            <div class="flex">
+              <!-- object-fill: stretch an element’s content to fit its container perfectly -->
+              <img
+                class="object-fill"
+                src="https://via.placeholder.com/1097x756"
+                alt=""
+              />
+            </div>
+            <div
+              class="pt-3 -mb-2 text-teal-800 font-bold hover:underline hover:text-red-400 cursor-pointer"
+            >
+              See More
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </AuthenticatedLayout>
 </template>
+
+<script setup>
+import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
+import { Head } from "@inertiajs/vue3";
+
+// Slider
+import "vue3-carousel/dist/carousel.css";
+import { Carousel, Navigation, Slide } from "vue3-carousel";
+</script>
+
+<style>
+.carousel__item {
+  font-size: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.carousel__prev,
+.carousel__next {
+  width: 40px;
+  height: 200px;
+  color: rgb(196, 196, 196);
+  /* move the prev/next button upword to align with the carousel */
+  margin-top: -100px;
+  border: transparent;
+}
+
+.carousel__prev:hover,
+.carousel__next:hover {
+  width: 40px;
+  height: 200px;
+  color: rgb(212, 212, 212);
+  margin-top: -100px;
+  border: 3px solid rgb(217, 217, 217);
+}
+</style>
