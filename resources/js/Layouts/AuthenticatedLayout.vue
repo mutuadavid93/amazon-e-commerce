@@ -36,7 +36,7 @@ const accountListFunc = (bool) => {
         <Link
           class="text-white h-50px p-2 pt-3 border-[1px] border-gray-900 rounded-sm hover:border-[1px] hover:border-gray-100 cursor-pointer"
         >
-          AMAZON
+          <img src="/images/logo/AMAZON_LOGO.png" width="100" alt="" />
         </Link>
       </div>
 
@@ -91,7 +91,7 @@ flex container after all other flex items have taken up their specified widths -
         >
           <!-- justify-center: aligns the flex items along the horizontal axis at the center of the container. -->
           <div class="flex items-center justify-center mt-2.5 px-1">
-            <img src="https://via.placeholder.com/35x20" alt="" />
+            <img class="mb-3 mr-1" width="23" src="/images/flags/US.png" alt="" />
 
             <!-- -mt-2 -mr-0.5: move the text upword to align with prev element and push it closer to the right -->
             <div class="text-[15px] text-white -mt-2 -mr-0.5 font-extrabold">EN</div>
