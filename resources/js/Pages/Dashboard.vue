@@ -34,7 +34,7 @@
       <div class="grid grid-cols-3 m-4 z-10 relative">
         <!-- HINT: grid items can as well be flexed -->
         <div class="p-1.5 flex" v-for="cat in $page.props.categories" :key="cat">
-          <Link href="/" class="bg-white p-5">
+          <Link :href="route('category.index', { id: cat.id })" class="bg-white p-5">
             <div class="text-2xl font-extrabold flex">{{ cat.name }}</div>
             <div class="flex">
               <!-- object-fill: stretch an element’s content to fit its container perfectly -->
