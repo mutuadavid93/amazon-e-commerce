@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Inertia\Inertia;
+use App\Models\Address;
+use App\Http\Requests\StoreAddressOptionsRequest;
 
 class AddressOptionsController extends Controller
 {
@@ -16,43 +18,26 @@ class AddressOptionsController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreAddressOptionsRequest $request)
     {
-        //
-    }
+        try {
+            $address = new Address();
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
+            $address->user_id = auth()->user()->id;
+            $address->address1 = $request->get('address1');
+            $address->address2 = $request->get('address2');
+            $address->city = $request->get('city');
+            $address->postalcode = $request->get('postalcode');
+            $address->country = $request->get('country');
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
+            $address->save();
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
+            return redirect()->route('address.index');
+        } catch (\Exception $e) {
+            return response()->json($e->getMessage());
+        }
     }
 
     /**
@@ -60,6 +45,12 @@ class AddressOptionsController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        try {
+            // Delete address
+            $address = Address::find($id);
+            $address->delete();
+        } catch (\Exception $e) {
+            return response()->json($e->getMessage());
+        }
     }
 }

@@ -39,6 +39,8 @@ Route::get('/address', [AddressController::class, 'index'])->name('address.index
 
 // NOTE: if controller name has two words, use underscore e.g. AddressOptions becomes address_options
 Route::get('/address_options', [AddressOptionsController::class, 'index'])->name('address_options.index');
+Route::post('/address_options', [AddressOptionsController::class, 'store'])->name('address_options.store');
+Route::post('/address_options/{id}', [AddressOptionsController::class, 'destroy'])->name('address_options.destroy');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
