@@ -2,8 +2,7 @@
 
 namespace App\Http\Middleware;
 
-use App\Models\Category;
-use App\Models\Product;
+use App\Models\{Address, Category, Product};
 use Illuminate\Http\Request;
 use Inertia\Middleware;
 use Tightenco\Ziggy\Ziggy;
@@ -34,7 +33,8 @@ class HandleInertiaRequests extends Middleware
     {
         return array_merge(parent::share($request), [
             'auth' => [
-                'user' => $request->user(),
+                'user' => auth()->check() ? auth()->user() : null,
+                'address' => auth()->check() ? Address::where('user_id', auth()->user()->id)->first() : null,
             ],
 
 

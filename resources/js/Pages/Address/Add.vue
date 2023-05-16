@@ -3,7 +3,7 @@
 
   <AuthenticateLayout>
     <div class="mt-8"></div>
-    <div class="max-w-[500px] mx-auto text-2xl font-extrabold">
+    <div class="max-w-[500px] mx-auto text-md">
       <div>Add a new address</div>
 
       <form action="">
