@@ -19,8 +19,10 @@
 
 -   `$ php artisan migrate:fresh --seed`
 
-
 #### Route Caching
+
 If config/cache.php 'stores' property is present and has content, then the route cache will be used. If not, then the route cache will not be used.
 
-If it's enabled and you make changes to your routes, you'll need to run `php artisan route:cache` to update the cache.
+If it's enabled and you make changes to your routes, you'll need to run `$ php artisan route:cache` to update the cache.
+
+Or `$ php artisan optimize` to update the cache and other things like configs

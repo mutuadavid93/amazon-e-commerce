@@ -54,7 +54,7 @@
 </template>
 
 <script setup>
-import { defineProps, toRefs } from "vue";
+import { toRefs } from "vue";
 import { Head, Link } from "@inertiajs/vue3";
 import AuthenticateLayout from "@/Layouts/AuthenticatedLayout.vue";
 import MapMarkerOutlineIcon from "vue-material-design-icons/MapMarkerOutline.vue";
