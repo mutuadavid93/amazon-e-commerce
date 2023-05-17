@@ -44,10 +44,12 @@
             <div class="flex items-center justify-between pt-2">
               <div class="text-red-600 text-sm font-bold">{{ product.price }}</div>
               <button
+                :disabled="isAlreadyInCart"
+                @click="addToCart(product)"
                 class="bg-yellow-400 px-2 font-bold text-sm rounded-lg border shadow-sm cursor-pointer"
               >
-                <!-- <span>Item added</span> -->
-                <span>Add to cart</span>
+                <span v-if="isAlreadyInCart">Item added</span>
+                <span v-else>Add to cart</span>
               </button>
             </div>
           </div>
@@ -58,15 +60,33 @@
 </template>
 
 <script setup>
-import { toRefs } from "vue";
+import { computed, toRefs } from "vue";
 import { Head, Link } from "@inertiajs/vue3";
 import AuthenticateLayout from "@/Layouts/AuthenticatedLayout.vue";
 import MapMarkerOutlineIcon from "vue-material-design-icons/MapMarkerOutline.vue";
+
+import { useCartStore } from "@/store/cart";
+import { storeToRefs } from "pinia";
+
+const cartStore = useCartStore();
+
+// NOTE: `cart` is state property from the store.
+const { cart } = storeToRefs(cartStore);
 
 // NOTE: `product` is passed from the controller.
 // and it's similar to `$page.props.product` accessible in the template.
 const props = defineProps({ product: Object });
 const { product } = toRefs(props);
+
+const addToCart = (_product) => {
+  cart.value.push(_product);
+};
+
+const isAlreadyInCart = computed(() => {
+  let result = cart.value.find((item) => item.id === product.value.id);
+  if (result) return true;
+  return false;
+});
 </script>
 
 <style lang="scss" scoped></style>
