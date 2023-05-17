@@ -52,3 +52,20 @@ Immediately re-migrate
 Lastly re-seed
 
 -   `$ php artisan db:seed`
+
+
+### Create a Form Request Validation Request
+---
+
+Form requests are custom request classes that encapsulate their own validation 
+and authorization logic.
+
+Below are the conventions used when creating form requests related to a resource controller:
+
+- The convention is as follows:
+  * Use the prefix "Store" for requests that handle the creation or storing of data.
+  * Use the prefix "Update" for requests that handle the updating of existing data.
+  * Use the prefix "Delete" for requests that handle the deletion of data.
+  * Use the prefix "Get" or "Fetch" for requests that retrieve or fetch data without modifying it.
+
+-   `$ php artisan make:request StoreAddressOptionsRequest`
