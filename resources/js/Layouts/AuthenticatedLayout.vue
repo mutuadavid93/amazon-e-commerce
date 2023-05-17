@@ -222,7 +222,8 @@ HINT: in this case the element will be relative to the viewport.
           </div>
         </div>
 
-        <div
+        <Link
+          :href="route('cart.index')"
           class="relative h-50px p-2 border-[1px] border-gray-900 rounded-sm hover:border-[1px] hover:border-gray-100 cursor-pointer"
         >
           <!-- NOTE: div can also have span parent -->
@@ -236,7 +237,7 @@ HINT: in this case the element will be relative to the viewport.
           <div class="flex items-center justify-center">
             <CartMinusIcon fillColor="#FCFCFC" :size="40" class="-mt-0.5" />
           </div>
-        </div>
+        </Link>
       </div>
     </div>
 
