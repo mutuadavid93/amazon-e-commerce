@@ -78,6 +78,8 @@ const { cart } = storeToRefs(cartStore);
 const props = defineProps({ product: Object });
 const { product } = toRefs(props);
 
+// TIP: Mutatating state directly in pinia e.g. `cart.value.push(_product)` is considered
+// valid practice thus don't worry about it.
 const addToCart = (_product) => {
   cart.value.push(_product);
 };

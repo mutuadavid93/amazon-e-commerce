@@ -60,16 +60,8 @@
             Number(total) == 0.0 ? 'bg-gray-400' : 'bg-yellow-400 hover:bg-yellow-400'
           "
           class="block mt-4 w-full text-center py-1 font-bold text-sm rounded-lg border shadow-sm cursor-pointer"
-          href="/"
-        >
-          Proceed to Checkout
-        </Link>
-
-        <!-- Return below code when checkout route is created.
-        
-        method="post"
-        as="button"
-        :href="
+          as="button"
+          :href="
             $page.props.auth.user != null
               ? route('checkout.index', {
                   total: totalWithoutDot(),
@@ -78,7 +70,9 @@
                 })
               : route('login')
           "
-         -->
+        >
+          Proceed to Checkout
+        </Link>
       </div>
     </div>
   </AuthenticateLayout>
@@ -111,10 +105,10 @@ const total = computed(() => {
   return sum > 0 ? sum.toFixed(2) : 0;
 });
 
-// const totalWithoutDot = () => {
-//   let num = String(total.value).split(".").join("");
-//   return Number(num);
-// };
+const totalWithoutDot = () => {
+  let num = String(total.value).split(".").join("");
+  return Number(num);
+};
 </script>
 
 <style lang="scss" scoped></style>
