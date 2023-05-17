@@ -14,6 +14,13 @@ import "./bootstrap";
 import "../css/app.css";
 import "animate.css";
 
+// Pinia global store
+import { createPinia } from "pinia";
+import piniaPluginPersistentState from "pinia-plugin-persistedstate";
+
+const pinia = createPinia();
+pinia.use(piniaPluginPersistentState);
+
 import { createApp, h } from "vue";
 import { createInertiaApp } from "@inertiajs/vue3";
 import { resolvePageComponent } from "laravel-vite-plugin/inertia-helpers";
@@ -31,6 +38,7 @@ createInertiaApp({
         ),
     setup({ el, App, props, plugin }) {
         return createApp({ render: () => h(App, props) })
+            .use(pinia)
             .use(plugin)
             .use(ZiggyVue, Ziggy)
             .mount(el);
