@@ -61,9 +61,9 @@
           "
           class="block mt-4 w-full text-center py-1 font-bold text-sm rounded-lg border shadow-sm cursor-pointer"
           as="button"
-          method="post"
+          :method="$page.props.auth.userAuth ? 'post' : 'get'"
           :href="
-            $page.props.auth.user != null
+            $page.props.auth.userAuth
               ? route('checkout.store', {
                   total: totalWithoutDot(),
                   total_decimal: total,
@@ -81,7 +81,7 @@
 
 <script setup>
 import { computed, toRefs } from "vue";
-import { Head, Link } from "@inertiajs/vue3";
+import { Head, Link, usePage } from "@inertiajs/vue3";
 import AuthenticateLayout from "@/Layouts/AuthenticatedLayout.vue";
 import CartOffIcon from "vue-material-design-icons/CartOff.vue";
 

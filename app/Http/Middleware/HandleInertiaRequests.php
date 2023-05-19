@@ -37,6 +37,9 @@ class HandleInertiaRequests extends Middleware
 
                 // get the first address of the user i.e. first() even if there are multiple addresses
                 'address' => auth()->check() ? Address::where('user_id', auth()->user()->id)->first() : null,
+
+                // check authenticated user
+                'userAuth' => auth()->check(),
             ],
 
 

@@ -93,7 +93,7 @@ class CheckoutController extends Controller
         // 
         // Fill i .env environment variables using your smtp credentials
         // and uncomment the following lines
-        // Mail::to($request->user())->send(new OrderShipped($order));
+        Mail::to($request->user())->send(new OrderShipped($order));
 
         return redirect()->route('checkout_success.index');
     }

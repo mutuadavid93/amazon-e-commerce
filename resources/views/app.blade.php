@@ -4,6 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
 
     <title inertia>{{ config('app.name', 'Laravel') }}</title>
     <script src="https://js.stripe.com/v3/"></script>
