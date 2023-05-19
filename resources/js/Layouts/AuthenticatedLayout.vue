@@ -440,7 +440,7 @@ i.e.  ensuring all child elements have equal height
           class="hover:bg-gray-200 pl-6 pr-3"
         >
           <Link
-            href="/"
+            :href="route('category.index', { id: cat.id })"
             class="py-2.5 text-[13px] text-black flex justify-between items-center hover:bg-gray-200 cursor-pointer"
           >
             {{ cat.name }}
