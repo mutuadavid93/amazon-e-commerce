@@ -69,3 +69,27 @@ Below are the conventions used when creating form requests related to a resource
   * Use the prefix "Get" or "Fetch" for requests that retrieve or fetch data without modifying it.
 
 -   `$ php artisan make:request StoreAddressOptionsRequest`
+
+
+
+### Integrating Stripe Payment Gateway
+---
+
+- Navigate to https://stripe.com/docs/development/quickstart and follow the instructions to get started with Stripe.
+
+Install the Stripe PHP library via Composer:
+-   `$ composer require stripe/stripe-php`
+
+Initialize it into CheckoutController.php
+
+
+### Create an Order migration 
+---
+
+-   `$ php artisan make:model Order -m`     
+
+
+### Check out Laravel Tips and Tricks
+---
+
+- [Tips and Tricks](https://github.com/LaravelDaily/laravel-tips)

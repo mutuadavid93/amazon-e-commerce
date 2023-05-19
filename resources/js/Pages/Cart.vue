@@ -61,11 +61,12 @@
           "
           class="block mt-4 w-full text-center py-1 font-bold text-sm rounded-lg border shadow-sm cursor-pointer"
           as="button"
+          method="post"
           :href="
             $page.props.auth.user != null
-              ? route('checkout.index', {
+              ? route('checkout.store', {
                   total: totalWithoutDot(),
-                  totalDecimal: total,
+                  total_decimal: total,
                   items: cart,
                 })
               : route('login')
