@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\OrderShipped;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use App\Models\Order;
@@ -87,7 +89,12 @@ class CheckoutController extends Controller
         $order->payment_intent = $payment_intent;
         $order->save();
 
-        // return redirect()->route('checkout_success.index');
-        return redirect()->route('dashboard');
+        // Send email if payment is successful
+        // 
+        // Fill i .env environment variables using your smtp credentials
+        // and uncomment the following lines
+        // Mail::to($request->user())->send(new OrderShipped($order));
+
+        return redirect()->route('checkout_success.index');
     }
 }
