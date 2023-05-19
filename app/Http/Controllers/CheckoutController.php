@@ -13,22 +13,28 @@ class CheckoutController extends Controller
      */
     public function index()
     {
+        // TIP: Never use env() in a controller. Use config() instead.
+        // If config:cache is ran, the env() function will not be loaded.
+        $secret = config('app.stripe_secret');
+
         $stripe = new \Stripe\StripeClient(
-            env('STRIPE_SECRET')
+            (string) $secret
         );
 
         $order = Order::where('user_id', '=', auth()->user()->id)
-            ->where('payment_intent', 'null')
+            ->where('payment_intent', null)
             ->first();
 
-        if (is_null($order)) {
-            return redirect()->route('checkout_success.index');
-        }
+        // if (is_null($order)) {
+        //     return redirect()->route('checkout_success.index');
+        // }
+
+        $total = $order->total;
 
         // Construct a payment intent
         $intent = $stripe->paymentIntents->create([
-            // NOTE: amount is in cents i.e. 2000 = $20 e.g. 20.00 The dot is ommitted
-            'amount' => (int) $order->total,
+            'amount' => (int) $total,
+            // 'amount' => 1000,
             'currency' => 'usd',
             'payment_method_types' => ['card'],
         ]);
@@ -71,14 +77,17 @@ class CheckoutController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request)
     {
+        $payment_intent = $request->payment_intent;
         $order = Order::where('user_id', '=', auth()->user()->id)
-            ->where('payment_intent', 'null')
+            ->where('payment_intent', null)
             ->first();
-        $order->payment_intent = $request['payment_intent'];
+        // sleep(3);
+        $order->payment_intent = $payment_intent;
         $order->save();
 
-        return redirect()->route('checkout_success.index');
+        // return redirect()->route('checkout_success.index');
+        return redirect()->route('dashboard');
     }
 }

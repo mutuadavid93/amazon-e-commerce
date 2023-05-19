@@ -87,3 +87,9 @@ Initialize it into CheckoutController.php
 ---
 
 -   `$ php artisan make:model Order -m`     
+
+
+### Check out Laravel Tips and Tricks
+---
+
+- [Tips and Tricks](https://github.com/LaravelDaily/laravel-tips)

@@ -2,7 +2,6 @@
   <Head title="Checkout" />
 
   <AuthenticateLayout>
-  {{ intent }}
     <div class="p-4 mt-2 max-w-[1250px] mx-auto text-3xl font-extrabold">Checkout</div>
 
     <div class="flex pt-4 max-w-[1250px] mx-auto">
@@ -30,7 +29,7 @@
       TIP: The numerators should add up to 12. e.g. 8+4=12 But the denominator should always be 12.
       -->
       <div class="w-4/12 border border-gray-400 rounded-md py-4 px-2">
-        <form>
+        <form id="payment-form">
           <div id="card-element">
             <!-- Stripe.js injects the Card Element Here... -->
           </div>
@@ -39,15 +38,14 @@
             class="flex justify-between text-xl text-red-700 font-extrabold border-y border-y-gray-300 my-3 p-2"
           >
             <div>Order total:</div>
-            <!-- <div v-if="order">USD: {{ order.total_decimal }}</div> -->
+            <div v-if="order">USD: {{ order.total_decimal }}</div>
           </div>
           <button
             id="submit"
             class="bg-yellow-400 hover:bg-yellow-500 rounded-md text-sm font-extrabold p-2"
           >
-            <!-- <div v-if="isProcessing" id="button-text">Processing...</div>
-            <div v-else id="button-text">Place your order in USD</div> -->
-            <div id="button-text">Place your order in USD</div>
+            <div v-if="isProcessing" id="button-text">Processing...</div>
+            <div v-else id="button-text">Place your order in USD</div>
           </button>
 
           <p
@@ -60,15 +58,21 @@
     </div>
 
     <div class="w-[1200px] mx-auto text-xl font-bold pb-2 underline">Items</div>
-    <div class="w-[1200px] mx-auto">
-      <div class="flex items-center py-1">PRODUCT DETAILS HERE</div>
+    <div class="w-[1200px] mx-auto" v-for="prod in JSON.parse(order.items)" :key="prod">
+      <div class="flex items-center py-1">
+        <img width="60" :src="prod.image" class="rounded-md" alt="" />
+        <div class="ml-4">
+          <div class="text-lg font-semibold">{{ prod.title }}</div>
+          <div class="font-semibold text-red-700">${{ prod.price }}</div>
+        </div>
+      </div>
     </div>
   </AuthenticateLayout>
 </template>
 
 <script setup>
 import { computed, toRefs, onMounted, ref } from "vue";
-import { Head, Link, useForm } from "@inertiajs/vue3";
+import { Head, useForm } from "@inertiajs/vue3";
 import AuthenticateLayout from "@/Layouts/AuthenticatedLayout.vue";
 
 import { useCartStore } from "@/store/cart";
@@ -104,7 +108,7 @@ let elements = null;
 let card = null;
 let form = null;
 let isProcessing = ref(false);
-const data = useForm({ payment_intent: null });
+const data = useForm({ payment_intent: null, total: 0, total_decimal: 0, items: [] });
 
 onMounted(() => {
   // HINT: Always use the public key on the frontend.
@@ -131,7 +135,8 @@ onMounted(() => {
     },
   };
 
-  card = elements.create("card", { style: style });
+  // TIP: see - https://stripe.com/docs/js/elements_object/create_element?type=card#elements_create-options
+  card = elements.create("card", { style: style, hidePostalCode: true });
   // Stripe injects an iframe into the DOM
   card.mount("#card-element");
 
@@ -176,6 +181,12 @@ const payWithCard = (stripe, card, clientSecret) => {
 // Shows a success message when the payment is complete
 const orderComplete = (paymentIntentId) => {
   data.payment_intent = paymentIntentId;
+
+  // Append the rest of the metadata
+  data.total = totalWithoutDot();
+  data.total_decimal = total.value;
+  data.items = cart.value;
+
   data.put("/checkout");
 };
 
