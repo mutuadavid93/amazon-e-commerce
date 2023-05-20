@@ -145,4 +145,6 @@ Initialize it into CheckoutController.php
 ### Project Video
 ---
 
+Note Github won't play this video since it's huge. Kindly click on it and download to play it on your laptop. Thank you.
+
 [![Watch the video](project-media/home-page.png)](project-media/amazon-2023-05-19_12.34.03.mp4)
