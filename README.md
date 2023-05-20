@@ -93,3 +93,56 @@ Initialize it into CheckoutController.php
 ---
 
 - [Tips and Tricks](https://github.com/LaravelDaily/laravel-tips)
+
+
+### Project Screenshots
+---
+
+1. Home Page
+
+![Home Page](project-media/home-page.png)
+
+
+2. Side Menu and Backdrop
+
+![Side Menu and Backdrop](project-media/sidemenu-and-backdrop.png)
+
+
+3. Category Products Page
+
+![Category Products Page](project-media/category-products-page.png)
+
+4. Product Details Page
+
+![Product Details Page](project-media/product-details.png)
+
+5. Cart Page
+
+![Cart Page](project-media/cart.png)
+
+6. Checkout Page
+
+![Checkout Page](project-media/checkout.png)
+
+
+7. Checkout Success Page
+
+![Checkout Success Page](project-media/checkout-success.png)
+
+8. Stripe Payment Successful Page
+
+![Stripe Payment Successful Page](project-media/stripe-payment-successful.png)
+
+9. Stripe Payment Details Page
+
+![Stripe Payment Details Page](project-media/stripe-payment-details.png)
+
+10. Mail Send Successfully
+
+![Mail Send Successfully](project-media/email-send-and-about-payment.png)
+
+
+### Project Video
+---
+
+[![Watch the video](project-media/home-page.png)](project-media/amazon-2023-05-19_12.34.03.mp4)
